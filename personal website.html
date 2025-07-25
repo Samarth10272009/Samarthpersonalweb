@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Samarth Ramesh Babu - Portfolio</title>
+<style>
+  :root {
+    --bg: #f4f7fa;
+    --text: #333;
+    --card-bg: #fff;
+    --header-bg: #001f4d;
+    --menu-bg: #003366;
+    --menu-hover: #0059b3;
+    --accent: #0059b3;
+    --border-radius: 8px;
+    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --transition-speed: 0.3s;
+    --box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+
+  body {
+    margin: 0;
+    font-family: var(--font-family);
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+  }
+
+  a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: color var(--transition-speed);
+  }
+  a:hover, a:focus {
+    color: var(--menu-hover);
+    outline: none;
+  }
+
+  header {
+    background-color: var(--header-bg);
+    color: white;
+    padding: 1.25rem 1rem;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    user-select: none;
+    max-width: 900px;
+    margin: auto;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+  }
+
+  header > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  header img {
+    border-radius: 50%;
+    object-fit: cover;
+    width: 90px;
+    height: 90px;
+    border: 3px solid white;
+    box-shadow: 0 0 8px rgba(255,255,255,0.3);
+    flex-shrink: 0;
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin: 0;
+    font-weight: 700;
+    line-height: 1.1;
+    user-select: text;
+  }
+
+  header p {
+    font-size: 1.1rem;
+    margin: 0.5rem 0 0;
+    font-weight: 500;
+    color: #d0d7f0;
+    user-select: text;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* DARK MODE TOGGLE */
+  #darkToggle {
+    display: none;
+  }
+
+  label[for="darkToggle"] {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    background-color: var(--accent);
+    color: white;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 1rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    user-select: none;
+    transition: background-color var(--transition-speed);
+    z-index: 2000;
+  }
+  label[for="darkToggle"]:hover,
+  label[for="darkToggle"]:focus {
+    background-color: var(--menu-hover);
+    outline: none;
+  }
+
+  body.dark {
+    --bg: #121212;
+    --text: #f0f0f0;
+    --card-bg: #1f1f1f;
+    --header-bg: #000;
+    --menu-bg: #1a1a1a;
+    --menu-hover: #333;
+    --accent: #3399ff;
+    --box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+
+  /* MENU TOGGLE CHECKBOX */
+  #menuToggle {
+    display: none;
+  }
+
+  /* The menu button left aligned above everything */
+  label[for="menuToggle"] {
+    background-color: var(--accent);
+    color: white;
+    border-radius: var(--border-radius);
+    padding: 0.75rem 1.25rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+    user-select: none;
+    margin: 1rem auto;
+    max-width: 900px;
+    display: block;
+    width: fit-content;
+    transition: background-color var(--transition-speed);
+  }
+  label[for="menuToggle"]:hover,
+  label[for="menuToggle"]:focus {
+    background-color: var(--menu-hover);
+    outline: none;
+  }
+
+  nav {
+    max-width: 900px;
+    margin: 0 auto 2rem;
+  }
+
+  .menu {
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+    max-width: 280px;
+    background-color: var(--menu-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    display: none;
+    flex-direction: column;
+    user-select: none;
+  }
+
+  /* Show menu when checkbox checked */
+  #menuToggle:checked + label + nav .menu {
+    display: flex;
+  }
+
+  .menu li {
+    border-bottom: 1px solid var(--menu-hover);
+  }
+  .menu li:last-child {
+    border-bottom: none;
+  }
+
+  .menu li a {
+    color: white;
+    padding: 0.75rem 1rem;
+    display: block;
+    font-weight: 600;
+    transition: background-color var(--transition-speed);
+    user-select: none;
+  }
+  .menu li a:hover,
+  .menu li a:focus {
+    background-color: var(--menu-hover);
+    outline: none;
+  }
+
+  main {
+    max-width: 900px;
+    margin: auto;
+    padding: 0 1rem 3rem;
+    box-sizing: border-box;
+  }
+
+  section {
+    background-color: var(--card-bg);
+    padding: 2.5rem 3rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-bottom: 2.5rem;
+    display: none;
+  }
+
+  section:target {
+    display: block;
+  }
+
+  /* Show home section only when no other section targeted */
+  body:not(:has(:target)) section#home {
+    display: block;
+  }
+
+  h2 {
+    font-weight: 700;
+    font-size: 2rem;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    color: var(--header-bg);
+  }
+
+  p, ul, li {
+    font-size: 1.15rem;
+  }
+
+  p {
+    margin-bottom: 1.6rem;
+    max-width: 850px;
+  }
+
+  ul {
+    padding-left: 1.5rem;
+    margin-bottom: 1.6rem;
+    max-width: 600px;
+  }
+
+  ul li {
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+
+  #pictures img {
+    width: 280px;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    transition: transform var(--transition-speed);
+    cursor: pointer;
+    display: inline-block;
+  }
+  #pictures img:hover,
+  #pictures img:focus {
+    transform: scale(1.05);
+    outline: none;
+  }
+
+  form {
+    max-width: 450px;
+    margin-top: 2rem;
+  }
+
+  form input[type="email"],
+  form input[type="text"] {
+    width: 100%;
+    padding: 0.9rem 1.1rem;
+    margin-bottom: 1.2rem;
+    border: 1.8px solid #ccc;
+    border-radius: var(--border-radius);
+    font-size: 1.1rem;
+    transition: border-color var(--transition-speed);
+  }
+  form input[type="email"]:focus,
+  form input[type="text"]:focus {
+    border-color: var(--accent);
+    outline: none;
+  }
+
+  form button {
+    width: 100%;
+    padding: 1rem 1.2rem;
+    background-color: var(--header-bg);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color var(--transition-speed);
+  }
+  form button:hover,
+  form button:focus {
+    background-color: var(--menu-hover);
+    outline: none;
+  }
+
+  #status {
+    margin-top: 1.2rem;
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  /* Responsive */
+  @media (max-width: 680px) {
+    header > div {
+      flex-direction: column;
+    }
+    #pictures img {
+      width: 100%;
+      margin-right: 0;
+    }
+    .menu {
+      max-width: 100%;
+      border-radius: var(--border-radius);
+    }
+    label[for="menuToggle"] {
+      max-width: 100%;
+      width: 100%;
+      margin: 1rem 0;
+    }
+    main {
+      padding: 0 1rem 4rem;
+    }
+    section {
+      padding: 2rem 1.5rem;
+      margin-bottom: 2rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<input type="checkbox" id="darkToggle" />
+<label for="darkToggle" aria-label="Toggle Dark Mode">🌙 Dark</label>
+
+<header>
+  <div>
+    <img src="IMG_2489.jpg" alt="Samarth Photo" />
+    <h1>Samarth Ramesh Babu</h1>
+  </div>
+  <p>Student | Tutor | Robotics Enthusiast | Lifelong Learner</p>
+</header>
+
+<input type="checkbox" id="menuToggle" />
+<label for="menuToggle" aria-haspopup="true" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle Menu">☰ Menu</label>
+
+<nav>
+  <ul id="main-menu" class="menu" role="menu" aria-label="Main Navigation">
+    <li><a href="#home" role="menuitem" tabindex="0" onclick="document.getElementById('menuToggle').checked = false;">Home</a></li>
+    <li><a href="#about" role="menuitem" tabindex="0" onclick="document.getElementById('menuToggle').checked = false;">About Me</a></li>
+    <li><a href="#TutoringInfo" role="menuitem" tabindex="0" onclick="document.getElementById('menuToggle').checked = false;">Tutoring Info</a></li>
+    <li><a href="#pictures" role="menuitem" tabindex="0" onclick="document.getElementById('menuToggle').checked = false;">Pictures</a></li>
+    <li><a href="#contact" role="menuitem" tabindex="0" onclick="document.getElementById('menuToggle').checked = false;">Contact</a></li>
+    <li><a href="#nonprofit" role="menuitem" tabindex="0" onclick="document.getElementById('menuToggle').checked = false;">Nonprofit</a></li>
+    <li><a href="#achievements" role="menuitem" tabindex="0" onclick="document.getElementById('menuToggle').checked = false;">Achievements</a></li>
+  </ul>
+</nav>
+
+<main>
+  <section id="home" tabindex="0">
+    <h2>Welcome to My Portfolio</h2>
+    <p>
+      Hello! I'm <strong>Samarth Ramesh Babu</strong>, a dedicated and passionate high school student based in Frisco, TX. I have a strong interest in technology, education, and robotics, which drives me to explore and build new skills every day. I strive to blend creativity and logic through coding projects, engineering challenges, and community engagement.
+    </p>
+    <p>
+      This portfolio website serves as a hub for sharing my journey, achievements, and ongoing projects. Whether you are here to learn about my tutoring availability, view my robotics endeavors, or simply connect, I hope you find this space informative and inspiring. Feel free to explore the tabs and reach out!
+    </p>
+  </section>
+
+  <section id="about" tabindex="0">
+    <h2>About Me</h2>
+    <p>
+      My name is Samarth, and I thrive on challenges that push my boundaries and broaden my perspective. Academically, I focus on mathematics and science, excelling in problem-solving and logical reasoning. as a upcoming member on my schoool's robotics team, I will try my best lead and collaborate to design, build, and program competitive robots.
+    </p>
+    <p>
+      Outside academics, music plays a big role in my life — I play the euphonium in my school band, where I’ve developed discipline, teamwork, and creativity. I’m also passionate about cricket, which keeps me active and teaches me the importance of strategy and perseverance.
+    </p>
+    <p>
+      Community involvement is close to my heart. I enjoy tutoring younger students, especially in STEM subjects and music, helping them build confidence and skills. I believe in giving back and inspiring the next generation of innovators and learners.
+    </p>
+  </section>
+
+  <section id="TutoringInfo" tabindex="0">
+    <h2>Tutoring Availability</h2>
+    <p>
+      I am currently offering personalized tutoring sessions designed to support students across a range of subjects and skill levels. My approach is patient, encouraging, and tailored to each learner’s unique needs and goals. Here is an overview of my availability and subjects:
+    </p>
+    <ul>
+      <li><strong>Euphonium:</strong> Monday through Friday, 1 PM to 5 PM CST. I provide structured lessons focused on improving tone quality, breath control, rhythm accuracy, and musical expression. Whether you’re a beginner or preparing for competitions, I guide you every step of the way.</li>
+      <li><strong>Mathematics (Kindergarten through Algebra 1):</strong> Saturday mornings from 10 AM to 1 PM CST. These sessions focus on strengthening foundational concepts, problem-solving skills, and confidence in math through interactive and engaging methods.</li>
+      <li><strong>English Language Arts (Kindergarten through 8th Grade):</strong> Weekend availability for improving grammar, vocabulary, reading comprehension, and writing skills. I aim to make learning language arts fun and practical through creative exercises and personalized feedback.</li>
+    </ul>
+    <p>
+      If you’re interested in scheduling a session or have questions about my tutoring, please reach out via the Contact section below!
+    </p>
+  </section>
+
+  <section id="pictures" tabindex="0">
+    <h2>Pictures</h2>
+    <p>These are some photos related to my band and musical activities:</p>
+    <img src="IMG_0088.jpg" alt="Band photo 1" />
+    <img src="IMG_0305.jpg" alt="Band photo 2" />
+    <img src="IMG_2787.PNG" alt="Band photo 3" />
+  </section>
+
+  <section id="contact" tabindex="0">
+    <h2>Contact Me</h2>
+    <p>
+      I welcome all questions, collaboration opportunities, and tutoring requests. You can reach me via the following channels:
+    </p>
+    <p><strong>Email:</strong> <a href="mailto:cricket4life205@gmail.com">cricket4life205@gmail.com</a></p>
+    <p><strong>Phone:</strong> <a href="tel:+19453107255">945-310-7255</a></p>
+    <p><strong>Instagram:</strong> <a href="https://instagram.com/samarth.205" target="_blank" rel="noopener">@samarth.205</a></p>
+
+    <h3>Request Tutoring</h3>
+    <form action="https://script.google.com/macros/s/AKfycbw5kYXqNivlVriPnE5u_jBrd_8SZpWGb6xFjpdlw227nJqmkQvMbAXQLiaAeSd9fCQ/exec" method="POST" target="_blank" novalidate>
+      <input type="email" name="email" placeholder="Your Email" required aria-required="true" />
+      <input type="text" name="tutoring" placeholder="Tutoring Subject" required aria-required="true" />
+      <button type="submit">Submit Request</button>
+    </form>
+    <p id="status" aria-live="polite" style="margin-top:1rem; font-weight:600; color: var(--accent);"></p>
+  </section>
+
+  <section id="nonprofit" tabindex="0">
+    <h2>Nonprofit</h2>
+    <p>
+      I founded <strong>roboforall</strong>, a nonprofit organization dedicated to bridging the gap for underserved kids who lack access to quality STEM education and robotics opportunities. Our mission is to inspire, educate, and empower young learners by providing free workshops, mentorship programs, and donated robotics kits.
+    </p>
+    <p>
+      My goal for the next few years is that, we have reached dozens of students in the community, sparking their interest in engineering, coding, and innovation. We believe every child deserves the chance to experience the thrill of creating and learning through technology.
+    </p>
+    <p>
+      Learn more about our work or support us
+    </p>
+  </section>
+
+  <section id="achievements" tabindex="0">
+    <h2>Achievements</h2>
+    <p>
+      I am proud to be part of the <strong>top band ensemble</strong> at my school, where I consistently strive to improve musically and contribute to a high-performing group. My efforts have been recognized with the <strong>Outstanding Soloist Performer</strong> award and selection for a <strong>quartet</strong> that performed at multiple public venues.
+    </p>
+    <p>
+      In academics and leadership, I competed in <strong>HOSA Area</strong> competitions and placed <strong>8th</strong>, just five places away from advancing to state-level competition. It was a great learning experience and fueled my motivation to push further.
+    </p>
+    <p>
+      Outside of school, I play <strong>leather ball cricket</strong> as a <strong>fast bowler</strong>, and I've earned multiple <strong>Man of the Match</strong> awards. Cricket has helped me develop discipline, teamwork, and focus under pressure.
+    </p>
+  </section>
+</main>
+
+<script>
+  // DARK MODE TOGGLE with checkbox
+  const darkToggleCheckbox = document.getElementById('darkToggle');
+  darkToggleCheckbox.addEventListener('change', () => {
+    if (darkToggleCheckbox.checked) {
+      document.body.classList.add('dark');
+      darkToggleCheckbox.nextElementSibling.textContent = '☀️ Light';
+    } else {
+      document.body.classList.remove('dark');
+      darkToggleCheckbox.nextElementSibling.textContent = '🌙 Dark';
+    }
+  });
+</script>
+
+</body>
+</html>
